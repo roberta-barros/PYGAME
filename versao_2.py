@@ -6,14 +6,14 @@ import random
 pygame.init()
 
 # ----- Gera tela principal
-WIDTH = 540
-HEIGHT = 960
+WIDTH = 450
+HEIGHT = 800
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('tetris')
 
 # ----- Inicia assets
-PECA2_WIDTH = 180
-PECA2_HEIGHT = 320
+PECA2_WIDTH = 450
+PECA2_HEIGHT = 800
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/tetris1.png').convert_alpha()                   #imagem do fundo
 background_img_small = pygame.transform.scale(background, (WIDTH,HEIGHT))
@@ -26,7 +26,7 @@ PECA2_X =random.randint(0, WIDTH-PECA2_WIDTH) #meteor_x = 200                   
 # y negativo significa que está acima do topo da janela. O meteoro começa fora da janela        
 PECA2_y = 10 #meteor_y = -METEOR_HEIGHT                      #variável: posição y do meteoro (valores negativos significam que o meteoro está acima da janela. Vamos sortear valores de maneira que ele sempre comece o movimento de fora da janela, ou seja, o mais baixo possível é -METEOR_HEIGHT.)
 PECA2_speedx = 0                                         #variável: velocidade x do meteoro ( se os valores da componente x da velocidade forem muito altos o meteoro vai se mover para um dos lados sem descer muito)
-PECA2_speedy = 2                                       #variável: velocidade y do meteoro (velocidades positivas em y significam que o meteoro vai se mover para baixo)
+PECA2_speedy = 1                                       #variável: velocidade y do meteoro (velocidades positivas em y significam que o meteoro vai se mover para baixo)
 
 # ===== Loop principal =====
 while game:
@@ -46,7 +46,7 @@ while game:
 
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
-    window.blit(background, (0,0))                                                 #desenha a imagem de fundo e depois a imagem do meteoro
+    window.blit(background_img_small, (0,0))                                                 #desenha a imagem de fundo e depois a imagem do meteoro
     window.blit(PECA2_img_small, (PECA2_X, PECA2_y))                             #desenha a imagem de fundo e depois a imagem do meteoro                              
 
     pygame.display.update()  # Mostra o novo frame para o jogador
