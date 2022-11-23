@@ -14,8 +14,8 @@ pygame.display.set_caption('tetris')
 # ----- Inicia assets
 # PECA_WIDTH = 145
 # PECA_HEIGHT = 85
-PECA_WIDTH = 725
-PECA_HEIGHT = 425
+PECA_WIDTH = 1450
+PECA_HEIGHT = 850
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/tetris1.png').convert_alpha()
 bck_largura = background.get_rect().width*2
