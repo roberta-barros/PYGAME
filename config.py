@@ -11,32 +11,8 @@ HEIGHT = 600 # Altura da tela
 FPS = 60 # Frames por segundo
 
 # Define tamanhos
-PECA1_WIDTH = 
-PECA1_HEIGHT = 
-
-PECA2_WIDTH = 
-PECA2_HEIGHT = 
-
-PECA3_WIDTH = 
-PECA3_HEIGHT = 
-
-PECA4_WIDTH = 
-PECA4_HEIGHT = 
-
-PECA5_WIDTH = 
-PECA5_HEIGHT = 
-
-PECA6_WIDTH = 
-PECA6_HEIGHT = 
-
-PECA7_WIDTH = 
-PECA7_HEIGHT = 
-
-PECA8_WIDTH = 
-PECA8_HEIGHT = 
-
-PECA9_WIDTH = 
-PECA9_HEIGHT = 
+PECA_WIDTH = 
+PECA_HEIGHT = 
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)

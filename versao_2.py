@@ -7,13 +7,13 @@ pygame.init()
 
 # ----- Gera tela principal
 WIDTH = 450
-HEIGHT = 800
+HEIGHT = 640
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('tetris')
 
 # ----- Inicia assets
 PECA2_WIDTH = 450
-PECA2_HEIGHT = 800
+PECA2_HEIGHT = 640
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/tetris1.png').convert_alpha()                   #imagem do fundo
 background_img_small = pygame.transform.scale(background, (WIDTH,HEIGHT))
