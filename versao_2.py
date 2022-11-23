@@ -24,7 +24,7 @@ PECA2_img_small = pygame.transform.scale(PECA2_img, (PECA2_WIDTH, PECA2_HEIGHT))
 game = True
 PECA2_X =random.randint(0, WIDTH-PECA2_WIDTH) #meteor_x = 200                                 #variável: posição x do meteoro
 # y negativo significa que está acima do topo da janela. O meteoro começa fora da janela        
-PECA2_y =  #meteor_y = -METEOR_HEIGHT                      #variável: posição y do meteoro (valores negativos significam que o meteoro está acima da janela. Vamos sortear valores de maneira que ele sempre comece o movimento de fora da janela, ou seja, o mais baixo possível é -METEOR_HEIGHT.)
+PECA2_y = 10 #meteor_y = -METEOR_HEIGHT                      #variável: posição y do meteoro (valores negativos significam que o meteoro está acima da janela. Vamos sortear valores de maneira que ele sempre comece o movimento de fora da janela, ou seja, o mais baixo possível é -METEOR_HEIGHT.)
 PECA2_speedx = 0                                         #variável: velocidade x do meteoro ( se os valores da componente x da velocidade forem muito altos o meteoro vai se mover para um dos lados sem descer muito)
 PECA2_speedy = 2                                       #variável: velocidade y do meteoro (velocidades positivas em y significam que o meteoro vai se mover para baixo)
 
