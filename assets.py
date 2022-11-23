@@ -22,6 +22,8 @@ GAMEOVER_SOUND = 'gameover_sound'
 def load_assets():
     assets = {}
     assets[BACKGROUND1] = pygame.image.load(os.path.join(IMG_DIR, 'tetris1.png')).convert()
+    assets[BACKGROUND2] = pygame.image.load(os.path.join(IMG_DIR, 'tetris_nivel2.png')).convert()
+    assets[BACKGROUND3] = pygame.image.load(os.path.join(IMG_DIR, 'tetris_nivel3.png')).convert()
     assets[PECA1_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'tetris2.png')).convert_alpha()
     assets[PECA1_IMG] = pygame.transform.scale(assets['meteor_img'], (METEOR_WIDTH, METEOR_HEIGHT))
     assets[PECA2_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'playerShip1_orange.png')).convert_alpha()
@@ -53,7 +55,6 @@ def load_assets():
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'tgfcoder-FrozenJam-SeamlessLoop.ogg'))
     pygame.mixer.music.set_volume(0.4)
-    assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
-    assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
-    assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
+    assets[BACKGROUND_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'Tetris.wav'))
+    assets[GAMEOVER_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
     return assets
