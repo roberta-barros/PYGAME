@@ -17,7 +17,7 @@ PECA2_HEIGHT = 800
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/tetris1.png').convert_alpha()                   #imagem do fundo
 background_img_small = pygame.transform.scale(background, (WIDTH,HEIGHT))
-PECA2_img = pygame.image.load('tetris/tetris2.png').convert_alpha()                    #imagem do fundo
+PECA2_img = pygame.image.load('assets/img/tetris2.png').convert_alpha()                    #imagem do fundo
 PECA2_img_small = pygame.transform.scale(PECA2_img, (PECA2_WIDTH, PECA2_HEIGHT))       #imagem do fundo
 
 # ----- Inicia estruturas de dados
