@@ -1,7 +1,7 @@
 import pygame
 from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
 from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, SCORE_FONT
-from sprites import Ship, Meteor, Bullet, Explosion
+from classes import Peca
 
 
 def game_screen(window):
@@ -11,22 +11,20 @@ def game_screen(window):
     assets = load_assets()
 
     # Criando um grupo de meteoros
-    all_sprites = pygame.sprite.Group()
-    all_meteors = pygame.sprite.Group()
-    all_bullets = pygame.sprite.Group()
+    all_pieces = pygame.sprite.Group()
+    fallen_pieces = pygame.sprite.Group()
     groups = {}
-    groups['all_sprites'] = all_sprites
-    groups['all_meteors'] = all_meteors
-    groups['all_bullets'] = all_bullets
+    groups['all_pieces'] = all_pieces
+    groups['fallen_pieces'] = fallen_pieces
 
-    # Criando o jogador
-    player = Ship(groups, assets)
-    all_sprites.add(player)
-    # Criando os meteoros
-    for i in range(8):
-        meteor = Meteor(assets)
-        all_sprites.add(meteor)
-        all_meteors.add(meteor)
+    # Criando as peças
+    for i in range(1,9):
+        all_pieces.add('tetris{0}'.format(i))
+
+    i = 2
+    name_file = 'tetris{0}'.format(i)
+    piece = Peca(groups, assets, name_file)
+    fallen_pieces.add(piece)
 
     DONE = 0
     PLAYING = 1
