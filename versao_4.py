@@ -12,13 +12,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('tetris')
 
 # ----- Inicia assets
-peca_width = 125
-peca_height = 85
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/tetris1.png').convert()       #imagem do fundo
-background_img_small = pygame.transform.scale(background, (WIDTH,HEIGHT))
-PECA2_img = pygame.image.load('assets/img/ftetris2.png').convert_alpha()
-PECA2_img = pygame.transform.scale(PECA2_img, (peca_width, peca_height))
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos

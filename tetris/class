@@ -1,0 +1,19 @@
+import random
+import pygame
+from config import WIDTH, HEIGHT, PECA_HEIGHT, PECA_WIDTH, pecas, cores_pecas
+from assets import SCORE_FONT, BACKGROUND_SOUND, GAMEOVER_SOUND
+
+class Pecas(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, name_file):
+        pygame.sprite.Sprite.__init__(self)
+        self.rect.x = 120
+        self.rect.y = 37
+        self.speedx = 0
+        self.speedy = 3
+        self.type = random.randint(0, len(self.pecas) - 1)
+        self.color = random.randint(1, len(cores_pecas) - 1)
+        self.rotation = 0
+    def image(self):
+        return self.figures[self.type][self.rotation]
+    def rotate(self):
+        self.rotation = (self.rotation + 1) % len(self.figures[self.type])
