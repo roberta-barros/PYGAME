@@ -14,7 +14,7 @@ FPS = 60 # Frames por segundo
 PECA_WIDTH = 
 PECA_HEIGHT = 
 
-# Define tamanho e posição das peças
+# Define as peças
 pecas = [
         [[1, 5, 9, 13], [4, 5, 6, 7]],
         [[4, 5, 9, 10], [2, 6, 5, 9]],
