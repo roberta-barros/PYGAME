@@ -1,0 +1,31 @@
+import pygame
+
+pygame.init()
+ 
+fps = 60
+Clock = pygame.time.Clock()
+ 
+W, H = 10, 20
+PECA = 38
+width = W * PECA
+height = H * PECA
+screen = pygame.display.set_mode((width, height))
+
+grid = [pygame.Rect(x * PECA, y * PECA, PECA, PECA) for x in range(W) for y in range(H)]
+
+# Game loop.
+while True:
+  screen.fill((0, 0, 0))
+  
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      pygame.quit()
+      exit()
+  
+  # Update.
+  
+  # Desenhar grades
+  [pygame.draw.rect(screen, (40, 40, 40), i_rect, 1) for i_rect in grid]
+  
+  pygame.display.flip()
+  Clock.tick(fps)
