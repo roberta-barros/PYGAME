@@ -11,9 +11,47 @@ class Pecas(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 3
         self.type = random.randint(0, len(self.pecas) - 1)
-        self.color = random.randint(1, len(cores_pecas) - 1)
+        self.cores_pecas = random.randint(1, len(cores_pecas) - 1)
         self.rotation = 0
     def image(self):
-        return self.figures[self.type][self.rotation]
+        return self.pecas[self.type][self.rotation]
     def rotate(self):
-        self.rotation = (self.rotation + 1) % len(self.figures[self.type])
+        self.rotation = (self.rotation + 1) % len(self.pecas[self.type])
+
+class Tetris(pygame.sprite.Sprite):
+    level = 2
+    score = 0
+    state = "start"
+    field = []
+    x = 100
+    y = 60
+    zoom = 20
+    figure = None
+    def __init__(self, height, width):
+        pygame.sprite.Sprite.__init__(self)
+        self.height = HEIGHT
+        self.width = WIDTH
+        self.field = []
+        self.score = 0
+        self.state = "start"
+
+        for i in range(HEIGHT):
+            new_line = []
+            for j in range(WIDTH):
+                new_line.append(0)
+            self.field.append(new_line)
+
+    def nova_peca(self):
+        self.peca = Pecas(3, 0,random.randint(0, len(pecas) - 1))
+
+    def interceccao(self):
+        intersection = False
+        for i in range(4):
+            for j in range(4):
+                if i * 4 + j in self.block.image():
+                    if i + self.block.y > self.height - 1 or \
+                            j + self.block.x > self.width - 1 or \
+                            j + self.block.x < 0 or \
+                            self.field[i + self.block.y][j + self.block.x] > 0:
+                        intersection = True
+        return intersection
