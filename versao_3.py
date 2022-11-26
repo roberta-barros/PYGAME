@@ -37,7 +37,7 @@ peca_y = -PECA
 peca_speedx = 1
 peca_speedy = 1  # Velocidade y da peça (velocidades positivas em y significam que a peça vai se mover para baixo)
 
-class Block:
+class Block(pygame.sprite.Sprite):
 
     pecas = [
         [[1, 5, 9, 13], [4, 5, 6, 7]],
@@ -50,6 +50,7 @@ class Block:
     ]
 
     def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
         self.type = random.randint(0, len(self.pecas) - 1)
@@ -87,7 +88,7 @@ class Tetris:
                 new_line.append(0)
             self.field.append(new_line)
 
-    def new_figure(self):
+    def nova_peca(self):
         self.figure = Block(3, 0)
 
     def intersects(self):
@@ -116,13 +117,7 @@ class Tetris:
                         self.field[i1][j] = self.field[i1 - 1][j]
         self.score += lines ** 2
 
-    def go_space(self):
-        while not self.intersects():
-            self.figure.y += 1
-        self.figure.y -= 1
-        self.freeze()
-
-    def go_down(self):
+    def down(self):
         self.figure.y += 1
         if self.intersects():
             self.figure.y -= 1
@@ -134,11 +129,11 @@ class Tetris:
                 if i * 4 + j in self.figure.image():
                     self.field[i + self.figure.y][j + self.figure.x] = self.figure.color
         self.break_lines()
-        self.new_figure()
+        self.nova_peca()
         if self.intersects():
             self.state = "gameover"
 
-    def go_side(self, dx):
+    def side(self, dx):
         old_x = self.figure.x
         self.figure.x += dx
         if self.intersects():
@@ -164,29 +159,27 @@ while not done:
     screen.blit(background_img_small, (width, 0))
     [pygame.draw.rect(screen, (40, 40, 40), i_rect, 1) for i_rect in grid]
     if game.figure is None:
-        game.new_figure()
+        game.nova_peca()
     counter += 1
     if counter > 100000:
         counter = 0
 
     if counter % (fps // game.level // 2) == 0 or pressing_down:
         if game.state == "start":
-            game.go_down()
+            game.down()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                game.rotate()
             if event.key == pygame.K_DOWN:
                 pressing_down = True
             if event.key == pygame.K_LEFT:
-                game.go_side(-1)
+                game.side(-1)
             if event.key == pygame.K_RIGHT:
-                game.go_side(1)
+                game.side(1)
             if event.key == pygame.K_SPACE:
-                game.go_space()
+                game.rotate()
             if event.key == pygame.K_ESCAPE:
                 game.__init__(20, 10)
 
@@ -211,11 +204,11 @@ while not done:
                                       game.y + game.PECA * (i + game.figure.y) + 1,
                                       game.PECA - 2, game.PECA - 2])
 
-    font = pygame.font.SysFont('Calibri', 25, True, False)
+    font = pygame.font.SysFont('Calibri', 40, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
     text = font.render("Score: " + str(game.score), True, WHITE)
 
-    screen.blit(text, [0, 0])
+    screen.blit(text, [400, 0])
     if game.state == "gameover":
         done = True
 
