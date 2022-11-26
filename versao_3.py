@@ -13,9 +13,10 @@ W, H = 10, 20
 PECA = 38
 width = W * PECA
 height = H * PECA
-RES = 750, 940
+RES = 750, 760 
+game_res = width, height
 screen = pygame.display.set_mode(RES)
-game_screen = pygame.Surface(width, height)
+game_screen = pygame.Surface(game_res)
 
 grid = [pygame.Rect(x * PECA, y * PECA, PECA, PECA) for x in range(W) for y in range(H)]
 
@@ -67,6 +68,8 @@ class Tetris:
     state = "start"
     field = []
     W, H = 10, 20
+    x = 0
+    y = 0
     PECA = 38
     width = W * PECA
     height = H * PECA
@@ -157,6 +160,9 @@ GRAY = (128, 128, 128)
 pressing_down = False
 
 while not done:
+    screen.fill((0, 0, 0)) # Preenche com a cor preta
+    screen.blit(background_img_small, (width, 0))
+    [pygame.draw.rect(screen, (40, 40, 40), i_rect, 1) for i_rect in grid]
     if game.figure is None:
         game.new_figure()
     counter += 1
@@ -188,14 +194,12 @@ while not done:
             if event.key == pygame.K_DOWN:
                 pressing_down = False
 
-    screen.fill(WHITE)
-
     for i in range(game.height):
         for j in range(game.width):
-            pygame.draw.rect(screen, GRAY, [game.x + game.zoom * j, game.y + game.zoom * i, game.zoom, game.zoom], 1)
+            pygame.draw.rect(screen, GRAY, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
             if game.field[i][j] > 0:
                 pygame.draw.rect(screen, cores[game.field[i][j]],
-                                 [game.x + game.zoom * j + 1, game.y + game.zoom * i + 1, game.zoom - 2, game.zoom - 1])
+                                 [game.x + game.PECA * j + 1, game.y + game.PECA * i + 1, game.PECA - 2, game.PECA - 1])
 
     if game.figure is not None:
         for i in range(4):
@@ -203,20 +207,17 @@ while not done:
                 p = i * 4 + j
                 if p in game.figure.image():
                     pygame.draw.rect(screen, cores[game.figure.color],
-                                     [game.x + game.zoom * (j + game.figure.x) + 1,
-                                      game.y + game.zoom * (i + game.figure.y) + 1,
-                                      game.zoom - 2, game.zoom - 2])
+                                     [game.x + game.PECA * (j + game.figure.x) + 1,
+                                      game.y + game.PECA * (i + game.figure.y) + 1,
+                                      game.PECA - 2, game.PECA - 2])
 
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
-    text = font.render("Score: " + str(game.score), True, BLACK)
-    text_game_over = font1.render("Game Over", True, (255, 125, 0))
-    text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
+    text = font.render("Score: " + str(game.score), True, WHITE)
 
     screen.blit(text, [0, 0])
     if game.state == "gameover":
-        screen.blit(text_game_over, [20, 200])
-        screen.blit(text_game_over1, [25, 265])
+        done = True
 
     pygame.display.flip()
     Clock.tick(fps)
