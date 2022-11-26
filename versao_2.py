@@ -6,58 +6,84 @@ import random
 pygame.init()
 
 # ----- Gera tela principal
-WIDTH = 360
-HEIGHT = 320*2
-window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('tetris')
+fps = 60
+Clock = pygame.time.Clock()
+ 
+W, H = 10, 20
+PECA = 38
+width = W * PECA
+height = H * PECA
+game_res = width, height
+RES = 750, 600
+screen = pygame.display.set_mode(RES)
+game_screen = pygame.Surface(game_res)
+
+grid = [pygame.Rect(x * PECA, y * PECA, PECA, PECA) for x in range(W) for y in range(H)]
+
+pygame.display.set_caption('Tetris')
 
 # ----- Inicia assets
-# PECA_WIDTH = 145
-# PECA_HEIGHT = 85
-PECA_WIDTH = 1450
-PECA_HEIGHT = 850
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/tetris1.png').convert_alpha()
-bck_largura = background.get_rect().width*2
-bck_altura = background.get_rect().height*2                   #imagem do fundo
-background_img_small = pygame.transform.scale(background, (bck_largura,bck_altura))
-PECA8_img = pygame.image.load('assets/img/peca8.png').convert_alpha()     #imagem do fundo
-#peca2_largura = PECA2_img.get_rect().width*2
-#peca2_altura = PECA2_img.get_rect().height*2
-PECA8_img_small = pygame.image.load('assets/img/peca8.png').convert_alpha()
-PECA8_img_small = pygame.transform.scale(PECA8_img, (PECA_WIDTH, PECA_HEIGHT))       #imagem do fundo
+background = pygame.image.load('assets/img/universo.png').convert()
+background_img_small = pygame.transform.scale(background, (width, height))
+
+# Define as peças
+figures = [
+        [[1, 5, 9, 13], [4, 5, 6, 7]],
+        [[4, 5, 9, 10], [2, 6, 5, 9]],
+        [[6, 7, 9, 10], [1, 5, 6, 10]],
+        [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
+        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
+        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
+        [[1, 2, 5, 6]],
+    ]
+    
+cores = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (120, 37, 179)]
 
 # ----- Inicia estruturas de dados
 game = True
-PECA8_X =38 #random.randint(0, WIDTH-PECA2_WIDTH) #peca8_x = 200                                 #variável: posição x do meteoro
-# y negativo significa que está acima do topo da janela. O meteoro começa fora da janela        
-PECA8_y = 37.5 #peca8_y = -PECA_HEIGHT                      #variável: posição y da peça 8 (valores negativos significam que a peça está acima da janela. Vamos sortear valores de maneira que ele sempre comece o movimento de fora da janela, ou seja, o mais baixo possível é -PECA_HEIGHT.)
-PECA8_speedx = 0                                         #variável: velocidade x do meteoro ( se os valores da componente x da velocidade forem muito altos o meteoro vai se mover para um dos lados sem descer muito)
-PECA8_speedy = 0                                   #variável: velocidade y do meteoro (velocidades positivas em y significam que o meteoro vai se mover para baixo)
+peca_x = width/2
+peca_y = -PECA
+peca_speedx = 1
+peca_speedy = 1  # Velocidade y da peça (velocidades positivas em y significam que a peça vai se mover para baixo)
+
+class Block(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.x = x
+        self.y = y
+        self.type = random.randint(0, len(self.figures) - 1)
+        self.color = random.randint(1, len(cores) - 1)
+        self.rotation = 0
+
+    def image(self):
+        return self.figures[self.type][self.rotation]
+
+    def rotate(self):
+        self.rotation = (self.rotation + 1) % len(self.pecas[self.type])
 
 # ===== Loop principal =====
 while game:
+    screen.fill((0, 0, 0)) # Preenche com a cor branca
+    screen.blit(background_img_small, (width, 0))
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
+    
+    # Desenhar grades
+    [pygame.draw.rect(screen, (40, 40, 40), i_rect, 1) for i_rect in grid]
+  
+    pygame.display.flip()
+    Clock.tick(fps)
 
     # ----- Atualiza estado do jogo
     # Atualizando a posição do meteoro
-    PECA8_y += PECA8_speedy                                                         #atualiza a posição do meteoro
-    # Se o meteoro passar do final da tela, volta para cima
-    if PECA8_y > HEIGHT or PECA8_X + PECA8_X < 0 or PECA8_X > WIDTH:                #verifica se o meteoro saiu da tela. Nesse caso, faz ele voltar para a posição inicial.
-        PECA8_X =  random.randint(0, WIDTH-PECA_HEIGHT)                            #verifica se o meteoro saiu da tela. Nesse caso, faz ele voltar para a posição inicial.
-        PECA8_Y =  random.randint(-100,-PECA_HEIGHT)                               #verifica se o meteoro saiu da tela. Nesse caso, faz ele voltar para a posição inicial.
-
-    # ----- Gera saídas
-    window.fill((0, 0, 0))  # Preenche com a cor branca
-    window.blit(background_img_small, (0,0))                                                 #desenha a imagem de fundo e depois a imagem do meteoro
-    window.blit(PECA8_img_small, (PECA8_X, PECA8_y))                             #desenha a imagem de fundo e depois a imagem do meteoro                              
-
+    peca_x += peca_speedx
+    peca_y += peca_speedy
+    # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
-
