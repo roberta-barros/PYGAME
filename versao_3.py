@@ -336,22 +336,25 @@ while replay:
             for event in pygame.event.get():
                 # Verifica se foi fechado.
                 if event.type == pygame.QUIT:
+                    
                     state = QUIT
                     perdeu = False
                     exit()
+                
+                if event.type == pygame.KEYDOWN:
 
-                if event.key == pygame.K_SPACE:
-                    done = True
-                    estado = 'fim'
-                    perdeu = False
-                    replay = False
-                    exit()
+                    if event.key == pygame.K_SPACE:
+                        done = True
+                        estado = 'fim'
+                        perdeu = False
+                        replay = False
+                        exit()
 
-                if event.key == pygame.K_RETURN:
-                    done = False
-                    estado = 'inicio'
-                    perdeu = False
-                    replay = True
+                    if event.key == pygame.K_RETURN:
+                        done = False
+                        estado = 'inicio'
+                        perdeu = False
+                        replay = True
 
             screen.blit(tamanho_background, background_rect)
             screen.blit(tamanho_logo, (logo_x,logo_y))
