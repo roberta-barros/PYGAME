@@ -2,7 +2,8 @@ import pygame
 import os
 from config import WIDTH, HEIGHT, PECA_WIDTH, PECA_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR
 
-
+LOGO='logo'
+BACKGROUND_if = 'backgroundi'
 BACKGROUND1 = 'background1'
 BACKGROUND2 = 'background2'
 BACKGROUND3 = 'background3'
@@ -20,6 +21,8 @@ GAMEOVER_SOUND = 'gameover_sound'
 
 def load_assets():
     assets = {}
+    assets[LOGO] = pygame.image.load(os.path.join(IMG_DIR, 'logo.png')).convert()
+    assets[BACKGROUND_if] = pygame.image.load(os.path.join(IMG_DIR, 'fundo_inicio_fim.png')).convert()
     assets[BACKGROUND1] = pygame.image.load(os.path.join(IMG_DIR, 'tetris1.png')).convert()
     assets[BACKGROUND2] = pygame.image.load(os.path.join(IMG_DIR, 'tetris_nivel2.png')).convert()
     assets[BACKGROUND3] = pygame.image.load(os.path.join(IMG_DIR, 'tetris_nivel3.png')).convert()

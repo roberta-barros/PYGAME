@@ -4,9 +4,11 @@ import pygame
 import random
 from os import path
 from config import IMG_DIR,FPS, GAME, QUIT
+from pygame import mixer 
 
 
 pygame.init()
+pygame.mixer.init()
 
 # ----- Gera tela principal
 fps = 60
@@ -148,13 +150,13 @@ class Tetris:
         if self.intersects():
             self.figure.rotation = old_rotation
 
-
-
-
 #depois de tudo definido
 #Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
 estado = 'inicio'
 if estado == 'inicio': 
+    #mixer.music.load("game-over.wav")  rodar musica
+    #mixer.music.set_volume(0.7) 
+    #mixer.music.play()   
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
@@ -205,22 +207,16 @@ if estado == 'inicio':
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
 
-
-
-
-
-
 #após a introdução, o jogo devera começar 
 # ===== Loop principal =====
+estado = 'continua'
+#while estado == 'continua':
 done = False
 game = Tetris(20, 10)
 counter = 0
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GRAY = (128, 128, 128)
-pressing_down = False
-
-
+go_down = False
 
 while not done:
     screen.fill((0, 0, 0)) # Preenche com a cor preta
@@ -232,16 +228,17 @@ while not done:
     if counter > 100000:
         counter = 0
 
-    if counter % (fps // game.level // 2) == 0 or pressing_down:
+    if counter % (fps // game.level // 2) == 0 or go_down:
         if game.state == "start":
             game.down()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True # DONE
+            
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                pressing_down = True
+                go_down = True
             if event.key == pygame.K_LEFT:
                 game.side(-1)
             if event.key == pygame.K_RIGHT:
@@ -253,11 +250,11 @@ while not done:
 
     if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                pressing_down = False
+                go_down = False
 
     for i in range(game.height):
         for j in range(game.width):
-            pygame.draw.rect(screen, GRAY, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
+            pygame.draw.rect(screen, WHITE, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
             if game.field[i][j] > 0:
                 pygame.draw.rect(screen, cores[game.field[i][j]],
                                  [game.x + game.PECA * j + 1, game.y + game.PECA * i + 1, game.PECA - 2, game.PECA - 1])
@@ -265,7 +262,7 @@ while not done:
     if game.figure is not None:
         for i in range(4):
             for j in range(4):
-                p = i * 4 + j
+                p = i*4 + j
                 if p in game.figure.image():
                     pygame.draw.rect(screen, cores[game.figure.color],
                                      [game.x + game.PECA * (j + game.figure.x) + 1,
@@ -279,13 +276,10 @@ while not done:
     screen.blit(text, [400, 0])
     if game.state == "gameover":
         done = True # DONE
+        
 
     pygame.display.flip()
     Clock.tick(fps)
-
-
-
-
 
 #Quando o jogador perder, uma tela de game over deve aparecer
 if done == True:
@@ -308,25 +302,48 @@ if done == True:
     icone_x = 10
     icone_y = 10 
     #texto
-    font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
-    texto = font.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
-    texto_x = 180
-    texto_y = 580
+    font1 = pygame.font.SysFont('Britannic Bold', 40, True, False) 
+    texto1 = font1.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
+    texto1_x = 180
+    texto1_y = 580
+
+    font2 = pygame.font.SysFont('Britannic Bold', 30, True, False)
+    texto2 = font2.render('Deseja voltar a jogar?', True, (153, 0, 153)) 
+    texto2_x = 230
+    texto2_y = 620
+
+    texto3 = font2.render('Aperte espaço para sair', True, (153, 0, 153)) 
+    texto3_x = 220
+    texto3_y = 650
+
     # ----- Inicia estruturas de dados
     perdeu = True
 
     # ===== Loop principal =====
     while perdeu:
-        # ----- Trata eventos
+        # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
-            print(event) #o que são os eventos
-            # ----- Verifica consequências
+            # Verifica se foi fechado.
             if event.type == pygame.QUIT:
+                state = QUIT
                 perdeu = False
+
+            if event.key == pygame.K_SPACE:
+                done = True
+                estado = 'fim'
+                perdeu = False
+
+            if event.key == pygame.K_RIGHT:
+                done = False
+                estado = 'continua'
+                perdeu = False
+
 
         screen.blit(tamanho_background, background_rect)
         screen.blit(tamanho_logo, (logo_x,logo_y))
-        screen.blit(texto, (texto_x, texto_y)) 
+        screen.blit(texto1, (texto1_x, texto1_y)) 
+        screen.blit(texto2, (texto2_x, texto2_y))
+        screen.blit(texto3, (texto3_x, texto3_y))
         screen.blit(tamanho_icone, (icone_x,icone_y))
         # ----- Atualiza estado do jogo
         pygame.display.update()  # Mostra o novo frame para o jogador
