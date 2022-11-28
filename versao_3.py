@@ -154,13 +154,24 @@ if estado == 'inicio':
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
-    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo_inicio_fim.png')).convert()
+    #fundo
+    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo_inicio_fim1.png')).convert_alpha()
     background_rect = background_if.get_rect()
+    tamanho_background = pygame.transform.scale(background_if, (width*2,height))  
+    #logo
     LOGO = pygame.image.load(path.join(IMG_DIR, 'logo.png')).convert_alpha()
+    tamanho_logo = pygame.transform.scale(LOGO, (345,300))
     logo_rect = LOGO.get_rect()
+    logo_x = 190
+    logo_y = 150   
+    #texto
+    font = pygame.font.SysFont(None, 50) 
+    texto = font.render('Aperte qualquer tecla para começar!', True, (0, 0, 0)) 
+    texto_x = 70
+    texto_y = 500
 
-    running = True
-    while running:
+    inicio = True
+    while inicio:
 
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
@@ -170,15 +181,16 @@ if estado == 'inicio':
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 state = QUIT
-                running = False
+                inicio = False
 
             if event.type == pygame.KEYUP:
                 state = GAME
-                running = False
+                inicio = False
 
         # A cada loop, redesenha o fundo e os sprites
-        screen.blit(background_if, background_rect)
-        screen.blit(LOGO, logo_rect)
+        screen.blit(tamanho_background, background_rect)
+        screen.blit(tamanho_logo, (logo_x,logo_y))
+        screen.blit(texto, (texto_x, texto_y))  #desenha em window a imagem text na posição (x,y)
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
