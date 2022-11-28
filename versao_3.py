@@ -171,7 +171,7 @@ if estado == 'inicio':
     icone_y = 10 
     #texto
     font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
-    texto = font.render('Aperte qualquer tecla para começar!', True, (50, 50, 210)) 
+    texto = font.render('Aperte qualquer tecla para começar!', True, (150, 50, 250)) 
     texto_x = 85
     texto_y = 580
 
