@@ -27,7 +27,7 @@ pygame.display.set_caption('Tetris')
 
 # ----- Inicia assets
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/universo.png').convert()
+background = pygame.image.load('assets/img/fundo_inicio_fim2.png').convert()
 background_img_small = pygame.transform.scale(background, (width, height))
 
 # Define as cores
@@ -155,7 +155,7 @@ if estado == 'inicio':
 
     # Carrega o fundo da tela inicial
     #fundo
-    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo_inicio_fim1.png')).convert_alpha()
+    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo2.png')).convert_alpha()
     background_rect = background_if.get_rect()
     tamanho_background = pygame.transform.scale(background_if, (width*2,height))  
     #logo
@@ -164,9 +164,13 @@ if estado == 'inicio':
     logo_rect = LOGO.get_rect()
     logo_x = 90
     logo_y = 150   
+    #icone
+    ICONE = pygame.image.load(path.join(IMG_DIR, 'icone-removebg-preview.png')).convert_alpha()
+    tamanho_icone = pygame.transform.scale(ICONE, (60,60))
+    icone_x = 10
+    icone_y = 10 
     #texto
-    font = pygame.font.SysFont('Britannic Bold', 40, True, False)
-    #font = pygame.font.SysFont(None, 50) 
+    font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
     texto = font.render('Aperte qualquer tecla para começar!', True, (50, 50, 210)) 
     texto_x = 85
     texto_y = 580
@@ -191,7 +195,8 @@ if estado == 'inicio':
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(tamanho_background, background_rect)
         screen.blit(tamanho_logo, (logo_x,logo_y))
-        screen.blit(texto, (texto_x, texto_y))  #desenha em window a imagem text na posição (x,y)
+        screen.blit(texto, (texto_x, texto_y)) 
+        screen.blit(tamanho_icone, (icone_x,icone_y))
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
