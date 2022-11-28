@@ -159,16 +159,17 @@ if estado == 'inicio':
     background_rect = background_if.get_rect()
     tamanho_background = pygame.transform.scale(background_if, (width*2,height))  
     #logo
-    LOGO = pygame.image.load(path.join(IMG_DIR, 'logo.png')).convert_alpha()
-    tamanho_logo = pygame.transform.scale(LOGO, (345,300))
+    LOGO = pygame.image.load(path.join(IMG_DIR, 'logo2-removebg-preview.png')).convert_alpha()
+    tamanho_logo = pygame.transform.scale(LOGO, (550,400)) #345,300
     logo_rect = LOGO.get_rect()
-    logo_x = 190
+    logo_x = 90
     logo_y = 150   
     #texto
-    font = pygame.font.SysFont(None, 50) 
-    texto = font.render('Aperte qualquer tecla para começar!', True, (0, 0, 0)) 
-    texto_x = 70
-    texto_y = 500
+    font = pygame.font.SysFont('Britannic Bold', 40, True, False)
+    #font = pygame.font.SysFont(None, 50) 
+    texto = font.render('Aperte qualquer tecla para começar!', True, (50, 50, 210)) 
+    texto_x = 85
+    texto_y = 580
 
     inicio = True
     while inicio:
