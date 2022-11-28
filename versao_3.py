@@ -148,6 +148,10 @@ class Tetris:
         if self.intersects():
             self.figure.rotation = old_rotation
 
+
+
+
+#depois de tudo definido
 #Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
 estado = 'inicio'
 if estado == 'inicio': 
@@ -202,6 +206,11 @@ if estado == 'inicio':
         pygame.display.flip()
 
 
+
+
+
+
+#após a introdução, o jogo devera começar 
 # ===== Loop principal =====
 done = False
 game = Tetris(20, 10)
@@ -275,30 +284,50 @@ while not done:
     Clock.tick(fps)
 
 
+
+
+
 #Quando o jogador perder, uma tela de game over deve aparecer
 if done == True:
-    pygame.display.set_caption('GAME OVER')
-    font = pygame.font.SysFont(None, 48)  #  fonte e tamanho de texto
-    text = font.render('GAME OVER', True, (0, 0, 255))
+    clock = pygame.time.Clock()
 
+    # Carrega o fundo da tela inicial
+    #fundo
+    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo_inicio_fim2.png')).convert_alpha()
+    background_rect = background_if.get_rect()
+    tamanho_background = pygame.transform.scale(background_if, (width*2,height))  
+    #logo
+    LOGO = pygame.image.load(path.join(IMG_DIR, 'logo2-removebg-preview.png')).convert_alpha()
+    tamanho_logo = pygame.transform.scale(LOGO, (550,400)) #345,300
+    logo_rect = LOGO.get_rect()
+    logo_x = 90
+    logo_y = 150   
+    #icone
+    ICONE = pygame.image.load(path.join(IMG_DIR, 'icone-removebg-preview.png')).convert_alpha()
+    tamanho_icone = pygame.transform.scale(ICONE, (60,60))
+    icone_x = 10
+    icone_y = 10 
+    #texto
+    font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
+    texto = font.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
+    texto_x = 180
+    texto_y = 580
     # ----- Inicia estruturas de dados
-    game = True
+    perdeu = True
 
     # ===== Loop principal =====
-    while game:
+    while perdeu:
         # ----- Trata eventos
         for event in pygame.event.get():
             print(event) #o que são os eventos
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                game = False
+                perdeu = False
 
-        # ----- Gera saídas
-        screen.fill((255, 255, 255))  # Preenche com a cor branca
-        x = 135
-        y = 10
-        screen.blit(text, (x, y))
-
+        screen.blit(tamanho_background, background_rect)
+        screen.blit(tamanho_logo, (logo_x,logo_y))
+        screen.blit(texto, (texto_x, texto_y)) 
+        screen.blit(tamanho_icone, (icone_x,icone_y))
         # ----- Atualiza estado do jogo
         pygame.display.update()  # Mostra o novo frame para o jogador
 
