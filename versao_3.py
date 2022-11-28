@@ -293,25 +293,36 @@ if done == True:
     icone_x = 10
     icone_y = 10 
     #texto
-    font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
-    texto = font.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
-    texto_x = 180
-    texto_y = 580
+    font1 = pygame.font.SysFont('Britannic Bold', 40, True, False) 
+    texto1 = font1.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
+    texto1_x = 180
+    texto1_y = 580
+
+    font2 = pygame.font.SysFont('Britannic Bold', 30, True, False)
+    texto2 = font2.render('Deseja voltar a jogar? Aperte espaço para recomeçar', True, (153, 0, 153)) 
+    texto2_x = 80
+    texto2_y = 620
+
     # ----- Inicia estruturas de dados
     perdeu = True
 
     # ===== Loop principal =====
     while perdeu:
-        # ----- Trata eventos
+        # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
-            print(event) #o que são os eventos
-            # ----- Verifica consequências
+            # Verifica se foi fechado.
             if event.type == pygame.QUIT:
+                state = QUIT
+                perdeu = False
+
+            if event.type == pygame.KEYUP:
+                done = False
                 perdeu = False
 
         screen.blit(tamanho_background, background_rect)
         screen.blit(tamanho_logo, (logo_x,logo_y))
-        screen.blit(texto, (texto_x, texto_y)) 
+        screen.blit(texto1, (texto1_x, texto1_y)) 
+        screen.blit(texto2, (texto2_x, texto2_y))
         screen.blit(tamanho_icone, (icone_x,icone_y))
         # ----- Atualiza estado do jogo
         pygame.display.update()  # Mostra o novo frame para o jogador
