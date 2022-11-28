@@ -274,7 +274,35 @@ while not done:
     pygame.display.flip()
     Clock.tick(fps)
 
-#if done == True:
-    #state = final(screen)
+
+#Quando o jogador perder, uma tela de game over deve aparecer
+if done == True:
+    pygame.display.set_caption('GAME OVER')
+    font = pygame.font.SysFont(None, 48)  #  fonte e tamanho de texto
+    text = font.render('GAME OVER', True, (0, 0, 255))
+
+    # ----- Inicia estruturas de dados
+    game = True
+
+    # ===== Loop principal =====
+    while game:
+        # ----- Trata eventos
+        for event in pygame.event.get():
+            print(event) #o que são os eventos
+            # ----- Verifica consequências
+            if event.type == pygame.QUIT:
+                game = False
+
+        # ----- Gera saídas
+        screen.fill((255, 255, 255))  # Preenche com a cor branca
+        x = 135
+        y = 10
+        screen.blit(text, (x, y))
+
+        # ----- Atualiza estado do jogo
+        pygame.display.update()  # Mostra o novo frame para o jogador
+
+    # ===== Finalização =====
+    pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
 
 pygame.quit()
