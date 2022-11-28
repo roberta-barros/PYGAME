@@ -5,6 +5,7 @@ import random
 from os import path
 from config import IMG_DIR,FPS, GAME, QUIT
 from pygame import mixer 
+from assets import *
 
 
 pygame.init()
@@ -150,13 +151,15 @@ class Tetris:
         if self.intersects():
             self.figure.rotation = old_rotation
 
-#depois de tudo definido
-#Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
+# Depois de tudo definido
+# Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
+
 estado = 'inicio'
 if estado == 'inicio': 
-    #mixer.music.load("game-over.wav")  #rodar musica
-    #mixer.music.set_volume(0.7) 
-    #mixer.music.play()   
+    pygame.mixer.music.load(os.path.join(SND_DIR, 'Tetris.wav'))
+    #pygame.mixer.music.load("game-over.wav")  #rodar musica
+    pygame.mixer.music.set_volume(0.7) 
+    pygame.mixer.music.play()   
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
@@ -278,8 +281,7 @@ while not done:
     screen.blit(text, [400, 0])
     if game.state == "gameover":
         done = True # DONE
-        
-
+    
     pygame.display.flip()
     Clock.tick(fps)
 
