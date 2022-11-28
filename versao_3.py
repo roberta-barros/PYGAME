@@ -156,10 +156,7 @@ class Tetris:
 
 estado = 'inicio'
 if estado == 'inicio': 
-    pygame.mixer.music.load(os.path.join(SND_DIR, 'Tetris.wav'))
-    #pygame.mixer.music.load("game-over.wav")  #rodar musica
-    pygame.mixer.music.set_volume(0.7) 
-    pygame.mixer.music.play()   
+
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
@@ -221,6 +218,11 @@ counter = 0
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 go_down = False
+
+pygame.mixer.music.load(os.path.join(SND_DIR, 'Tetris.wav'))
+pygame.mixer.music.set_volume(0.7) 
+pygame.mixer.music.play() 
+
 
 while not done:
     screen.fill((0, 0, 0)) # Preenche com a cor preta
