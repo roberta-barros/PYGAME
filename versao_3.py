@@ -2,6 +2,9 @@
 # ----- Importa e inicia pacotes
 import pygame
 import random
+from os import path
+from config import IMG_DIR,FPS, GAME, QUIT
+
 
 pygame.init()
 
@@ -145,6 +148,42 @@ class Tetris:
         if self.intersects():
             self.figure.rotation = old_rotation
 
+#Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
+estado = 'inicio'
+if estado == 'inicio': 
+    clock = pygame.time.Clock()
+
+    # Carrega o fundo da tela inicial
+    background_if = pygame.image.load(path.join(IMG_DIR, 'fundo_inicio_fim.png')).convert()
+    background_rect = background_if.get_rect()
+    LOGO = pygame.image.load(path.join(IMG_DIR, 'logo.png')).convert_alpha()
+    logo_rect = LOGO.get_rect()
+
+    running = True
+    while running:
+
+        # Ajusta a velocidade do jogo.
+        clock.tick(FPS)
+
+        # Processa os eventos (mouse, teclado, botão, etc).
+        for event in pygame.event.get():
+            # Verifica se foi fechado.
+            if event.type == pygame.QUIT:
+                state = QUIT
+                running = False
+
+            if event.type == pygame.KEYUP:
+                state = GAME
+                running = False
+
+        # A cada loop, redesenha o fundo e os sprites
+        screen.blit(background_if, background_rect)
+        screen.blit(LOGO, logo_rect)
+
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+
+
 # ===== Loop principal =====
 done = False
 game = Tetris(20, 10)
@@ -153,6 +192,8 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
 pressing_down = False
+
+
 
 while not done:
     screen.fill((0, 0, 0)) # Preenche com a cor preta
@@ -170,7 +211,7 @@ while not done:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = True
+            done = True # DONE
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 pressing_down = True
@@ -210,9 +251,12 @@ while not done:
 
     screen.blit(text, [400, 0])
     if game.state == "gameover":
-        done = True
+        done = True # DONE
 
     pygame.display.flip()
     Clock.tick(fps)
+
+#if done == True:
+    #state = final(screen)
 
 pygame.quit()
