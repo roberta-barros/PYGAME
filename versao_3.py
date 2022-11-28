@@ -148,9 +148,6 @@ class Tetris:
         if self.intersects():
             self.figure.rotation = old_rotation
 
-
-
-
 #depois de tudo definido
 #Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
 estado = 'inicio'
@@ -205,11 +202,6 @@ if estado == 'inicio':
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
 
-
-
-
-
-
 #após a introdução, o jogo devera começar 
 # ===== Loop principal =====
 done = False
@@ -217,10 +209,7 @@ game = Tetris(20, 10)
 counter = 0
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GRAY = (128, 128, 128)
-pressing_down = False
-
-
+go_down = False
 
 while not done:
     screen.fill((0, 0, 0)) # Preenche com a cor preta
@@ -232,7 +221,7 @@ while not done:
     if counter > 100000:
         counter = 0
 
-    if counter % (fps // game.level // 2) == 0 or pressing_down:
+    if counter % (fps // game.level // 2) == 0 or go_down:
         if game.state == "start":
             game.down()
 
@@ -241,7 +230,7 @@ while not done:
             done = True # DONE
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                pressing_down = True
+                go_down = True
             if event.key == pygame.K_LEFT:
                 game.side(-1)
             if event.key == pygame.K_RIGHT:
@@ -253,11 +242,11 @@ while not done:
 
     if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                pressing_down = False
+                go_down = False
 
     for i in range(game.height):
         for j in range(game.width):
-            pygame.draw.rect(screen, GRAY, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
+            pygame.draw.rect(screen, WHITE, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
             if game.field[i][j] > 0:
                 pygame.draw.rect(screen, cores[game.field[i][j]],
                                  [game.x + game.PECA * j + 1, game.y + game.PECA * i + 1, game.PECA - 2, game.PECA - 1])
@@ -265,7 +254,7 @@ while not done:
     if game.figure is not None:
         for i in range(4):
             for j in range(4):
-                p = i * 4 + j
+                p = i*4 + j
                 if p in game.figure.image():
                     pygame.draw.rect(screen, cores[game.figure.color],
                                      [game.x + game.PECA * (j + game.figure.x) + 1,
@@ -282,10 +271,6 @@ while not done:
 
     pygame.display.flip()
     Clock.tick(fps)
-
-
-
-
 
 #Quando o jogador perder, uma tela de game over deve aparecer
 if done == True:
