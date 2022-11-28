@@ -158,6 +158,7 @@ class Tetris:
 replay = True
 
 while replay:
+
     # Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
     estado = 'inicio'
     if estado == 'inicio': 
@@ -261,8 +262,8 @@ while replay:
                     game.__init__(20, 10)
 
         if event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN:
-                    go_down = False
+            if event.key == pygame.K_DOWN:
+                go_down = False
 
         for i in range(game.height):
             for j in range(game.width):
@@ -306,26 +307,26 @@ while replay:
         tamanho_logo = pygame.transform.scale(LOGO, (550,400)) #345,300
         logo_rect = LOGO.get_rect()
         logo_x = 90
-        logo_y = 150   
+        logo_y = 50   
         #icone
         ICONE = pygame.image.load(path.join(IMG_DIR, 'icone-removebg-preview.png')).convert_alpha()
         tamanho_icone = pygame.transform.scale(ICONE, (60,60))
         icone_x = 10
         icone_y = 10 
         #texto
-        font1 = pygame.font.SysFont('Britannic Bold', 40, True, False) 
-        texto1 = font1.render('Perdeu! Tente outra vez', True, (153, 0, 153)) 
-        texto1_x = 180
-        texto1_y = 580
+        font1 = pygame.font.SysFont('Britannic Bold', 50, True, False) 
+        texto1 = font1.render('FIM DE JOGO!', True, (0, 0, 0)) 
+        texto1_x = 250
+        texto1_y = 540
 
-        font2 = pygame.font.SysFont('Britannic Bold', 30, True, False)
-        texto2 = font2.render('Aperte ENTER para jogar novamente', True, (153, 0, 153)) 
-        texto2_x = 230
+        font2 = pygame.font.SysFont('Britannic Bold', 40, True, False)
+        texto2 = font2.render('Aperte ENTER para jogar novamente', True, (0, 0, 0)) 
+        texto2_x = 100
         texto2_y = 620
 
-        texto3 = font2.render('Aperte ESPAÇO para sair', True, (153, 0, 153)) 
-        texto3_x = 220
-        texto3_y = 650
+        texto3 = font2.render('Aperte ESPAÇO para sair', True, (0, 0, 0)) 
+        texto3_x = 170
+        texto3_y = 670
 
         # ----- Inicia estruturas de dados
         perdeu = True
