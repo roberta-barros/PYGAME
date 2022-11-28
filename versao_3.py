@@ -4,9 +4,11 @@ import pygame
 import random
 from os import path
 from config import IMG_DIR,FPS, GAME, QUIT
+from pygame import mixer 
 
 
 pygame.init()
+pygame.mixer.init()
 
 # ----- Gera tela principal
 fps = 60
@@ -152,6 +154,9 @@ class Tetris:
 #Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
 estado = 'inicio'
 if estado == 'inicio': 
+    #mixer.music.load("game-over.wav")  rodar musica
+    #mixer.music.set_volume(0.7) 
+    #mixer.music.play()   
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
@@ -204,6 +209,8 @@ if estado == 'inicio':
 
 #após a introdução, o jogo devera começar 
 # ===== Loop principal =====
+estado = 'continua'
+#while estado == 'continua':
 done = False
 game = Tetris(20, 10)
 counter = 0
@@ -228,6 +235,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True # DONE
+            
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 go_down = True
@@ -268,6 +276,7 @@ while not done:
     screen.blit(text, [400, 0])
     if game.state == "gameover":
         done = True # DONE
+        
 
     pygame.display.flip()
     Clock.tick(fps)
@@ -299,9 +308,13 @@ if done == True:
     texto1_y = 580
 
     font2 = pygame.font.SysFont('Britannic Bold', 30, True, False)
-    texto2 = font2.render('Deseja voltar a jogar? Aperte espaço para recomeçar', True, (153, 0, 153)) 
-    texto2_x = 80
+    texto2 = font2.render('Deseja voltar a jogar?', True, (153, 0, 153)) 
+    texto2_x = 230
     texto2_y = 620
+
+    texto3 = font2.render('Aperte espaço para sair', True, (153, 0, 153)) 
+    texto3_x = 220
+    texto3_y = 650
 
     # ----- Inicia estruturas de dados
     perdeu = True
@@ -315,14 +328,22 @@ if done == True:
                 state = QUIT
                 perdeu = False
 
-            if event.type == pygame.KEYUP:
-                done = False
+            if event.key == pygame.K_SPACE:
+                done = True
+                estado = 'fim'
                 perdeu = False
+
+            if event.key == pygame.K_RIGHT:
+                done = False
+                estado = 'continua'
+                perdeu = False
+
 
         screen.blit(tamanho_background, background_rect)
         screen.blit(tamanho_logo, (logo_x,logo_y))
         screen.blit(texto1, (texto1_x, texto1_y)) 
         screen.blit(texto2, (texto2_x, texto2_y))
+        screen.blit(texto3, (texto3_x, texto3_y))
         screen.blit(tamanho_icone, (icone_x,icone_y))
         # ----- Atualiza estado do jogo
         pygame.display.update()  # Mostra o novo frame para o jogador
