@@ -154,7 +154,7 @@ class Tetris:
 #Antes de começar o jogo, uma tela de início deve aparecer para introduzir ao jogador o jogo
 estado = 'inicio'
 if estado == 'inicio': 
-    #mixer.music.load("game-over.wav")  rodar musica
+    #mixer.music.load("game-over.wav")  #rodar musica
     #mixer.music.set_volume(0.7) 
     #mixer.music.play()   
     clock = pygame.time.Clock()
@@ -193,6 +193,7 @@ if estado == 'inicio':
             if event.type == pygame.QUIT:
                 state = QUIT
                 inicio = False
+                exit()
 
             if event.type == pygame.KEYUP:
                 state = GAME
@@ -235,6 +236,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True # DONE
+            exit()
             
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
@@ -308,11 +310,11 @@ if done == True:
     texto1_y = 580
 
     font2 = pygame.font.SysFont('Britannic Bold', 30, True, False)
-    texto2 = font2.render('Deseja voltar a jogar?', True, (153, 0, 153)) 
+    texto2 = font2.render('Aperte ENTER para jogar novamente', True, (153, 0, 153)) 
     texto2_x = 230
     texto2_y = 620
 
-    texto3 = font2.render('Aperte espaço para sair', True, (153, 0, 153)) 
+    texto3 = font2.render('Aperte ESPAÇO para sair', True, (153, 0, 153)) 
     texto3_x = 220
     texto3_y = 650
 
@@ -333,9 +335,9 @@ if done == True:
                 estado = 'fim'
                 perdeu = False
 
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_KP_ENTER:
                 done = False
-                estado = 'continua'
+                estado = 'inicio'
                 perdeu = False
 
 
