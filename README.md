@@ -53,3 +53,6 @@ enter para recomeçar
 4. 
 link para o video do jogo funcionando
 https://youtu.be/pR8BR_ZoY8Q
+5. referências
+Código extraído de :
+https://levelup.gitconnected.com/writing-tetris-in-python-2a16bddb5318
