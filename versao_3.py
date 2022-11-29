@@ -24,8 +24,6 @@ game_res = width, height
 screen = pygame.display.set_mode(RES)
 game_screen = pygame.Surface(game_res)
 
-grid = [pygame.Rect(x * PECA, y * PECA, PECA, PECA) for x in range(W) for y in range(H)]
-
 pygame.display.set_caption('Tetris')
 
 # ----- Inicia assets
@@ -233,7 +231,6 @@ while replay:
     while not done:
         screen.fill((0, 0, 0)) # Preenche com a cor preta
         screen.blit(background_img_small, (width, 0))
-        [pygame.draw.rect(screen, (40, 40, 40), i_rect, 1) for i_rect in grid]
         if game.figure is None:
             game.nova_peca()
         counter += 1
@@ -282,9 +279,9 @@ while replay:
                                         game.y + game.PECA * (i + game.figure.y) + 1,
                                         game.PECA - 2, game.PECA - 2])
 
-        font = pygame.font.SysFont('Calibri', 40, True, False)
-        font1 = pygame.font.SysFont('Calibri', 65, True, False)
-        text = font.render("Score: " + str(game.score), True, WHITE)
+        font = pygame.font.SysFont('Britannia Bold', 40, True, False)
+        font1 = pygame.font.SysFont('Britannia Bold', 65, True, False)
+        text = font.render("Score: " + str(game.score), True, BLACK)
 
         screen.blit(text, [400, 0])
         if game.state == "gameover":
