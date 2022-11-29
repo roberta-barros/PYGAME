@@ -212,6 +212,109 @@ while replay:
             # Depois de desenhar tudo, inverte o display.
             pygame.display.flip()
 
+
+    estado = 'manual'
+    if estado == 'manual':
+        clock = pygame.time.Clock()
+
+        # Carrega o fundo da tela inicial
+        #fundo
+        background_if = pygame.image.load(path.join(IMG_DIR, 'fundo2.png')).convert_alpha()
+        background_rect = background_if.get_rect()
+        tamanho_background = pygame.transform.scale(background_if, (width*2,height))  
+        #logo
+        LOGO = pygame.image.load(path.join(IMG_DIR, 'logo2-removebg-preview.png')).convert_alpha()
+        tamanho_logo = pygame.transform.scale(LOGO, (130,100)) #345,300
+        logo_rect = LOGO.get_rect()
+        logo_x = 600
+        logo_y = 10   
+        #icone
+        ICONE = pygame.image.load(path.join(IMG_DIR, 'icone-removebg-preview.png')).convert_alpha()
+        tamanho_icone = pygame.transform.scale(ICONE, (60,60))
+        icone_x = 10
+        icone_y = 10
+        #texto
+        font = pygame.font.SysFont('Britannic Bold', 50, True, False) 
+        texto1 = font.render('instruções', True, (150, 50, 250)) 
+        texto1_x = 85
+        texto1_y = 100 
+        #tecla
+        TECLA = pygame.image.load(path.join(IMG_DIR, 'teclado.png')).convert_alpha()
+        tamanho_tecla = pygame.transform.scale(TECLA, (600,300))
+        tecla_x = 80
+        tecla_y = 150
+        #teclas
+        TECLAS = pygame.image.load(path.join(IMG_DIR, 'Desenho sem título-PhotoRoom.png')).convert_alpha()
+        tamanho_teclas = pygame.transform.scale(TECLAS, (100,50))
+        teclas_x = 80
+        teclas_y = 480
+        #enter
+        ENTER = pygame.image.load(path.join(IMG_DIR, 'enter.png')).convert_alpha()
+        tamanho_enter = pygame.transform.scale(ENTER, (100,50))
+        enter_x = 80
+        enter_y = 540
+        #espaço
+        ESPACO= pygame.image.load(path.join(IMG_DIR, 'espaço.png')).convert_alpha()
+        tamanho_espaco = pygame.transform.scale(ESPACO, (100,50))
+        espaco_x = 80
+        espaco_y = 600
+        #texto2
+        font = pygame.font.SysFont('Britannic Bold', 30, True, False) 
+        texto2 = font.render('mover esqueda/direita + acelerar', True, (150, 50, 250)) 
+        texto2_x = 110
+        texto2_y = 500 
+        #texto3
+        font = pygame.font.SysFont('Britannic Bold', 30, True, False) 
+        texto3 = font.render('reiniciar quando acabar', True, (150, 50, 250)) 
+        texto3_x = 180
+        texto3_y = 560  
+        #texto4
+        font = pygame.font.SysFont('Britannic Bold', 30, True, False) 
+        texto4 = font.render('girar a peça', True, (150, 50, 250)) 
+        texto4_x = 180
+        texto4_y = 610   
+        #texto
+        font = pygame.font.SysFont('Britannic Bold', 40, True, False) 
+        texto = font.render('Aperte qualquer tecla para começar!', True, (150, 50, 250)) 
+        texto_x = 85
+        texto_y = 660
+
+        inicio = True
+        while inicio:
+
+            # Ajusta a velocidade do jogo.
+            clock.tick(FPS)
+
+            # Processa os eventos (mouse, teclado, botão, etc).
+            for event in pygame.event.get():
+                # Verifica se foi fechado.
+                if event.type == pygame.QUIT:
+                    state = QUIT
+                    inicio = False
+                    exit()
+
+                if event.type == pygame.KEYUP:
+                    state = GAME
+                    inicio = False
+
+            # A cada loop, redesenha o fundo e os sprites
+            screen.blit(tamanho_background, background_rect)
+            screen.blit(tamanho_logo, (logo_x,logo_y))
+            screen.blit(texto1, (texto1_x, texto1_y))
+            screen.blit(texto, (texto_x, texto_y)) 
+            screen.blit(texto2, (texto2_x, texto2_y))
+            screen.blit(texto3, (texto3_x, texto3_y))
+            screen.blit(texto4, (texto4_x, texto4_y)) 
+            screen.blit(tamanho_icone, (icone_x,icone_y))
+            screen.blit(tamanho_tecla, (tecla_x,tecla_y))
+            screen.blit(tamanho_teclas, (teclas_x,teclas_y))
+            screen.blit(tamanho_enter, (enter_x,enter_y))
+            screen.blit(tamanho_espaco, (espaco_x,espaco_y))
+
+            # Depois de desenhar tudo, inverte o display.
+            pygame.display.flip()
+
+
     #após a introdução, o jogo devera começar 
     # ===== Loop principal =====
 
