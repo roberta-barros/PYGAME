@@ -260,7 +260,7 @@ while replay:
         espaco_y = 600
         #texto2
         font = pygame.font.SysFont('Britannic Bold', 30, True, False) 
-        texto2 = font.render('mover esqueda/direita + acelerar', True, (150, 50, 250)) 
+        texto2 = font.render('mover esquerda/direita + acelerar', True, (150, 50, 250)) 
         texto2_x = 110
         texto2_y = 500 
         #texto3
