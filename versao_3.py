@@ -315,7 +315,7 @@ while replay:
             pygame.display.flip()
 
 
-    #após a introdução, o jogo devera começar 
+    #após a instruçao, o jogo devera começar 
     # ===== Loop principal =====
 
     estado = 'continua'
