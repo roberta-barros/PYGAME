@@ -68,34 +68,34 @@ class Block(pygame.sprite.Sprite):
         self.rotation = (self.rotation + 1) % len(self.pecas[self.type])
 
 class Tetris:
-    level = 2
-    score = 0
-    state = "start"
-    field = []
     W, H = 10, 20
     x = 0
     y = 0
     PECA = 38
     width = W * PECA
     height = H * PECA
+    level = 2
+    score = 0
+    state = "start"
+    grid = []
     figure = None
 
     def __init__(self, height, width):
         self.height = height
         self.width = width
-        self.field = []
+        self.grid = []
         self.score = 0
         self.state = "start"
         for i in range(height):
-            new_line = []
+            newline = []
             for j in range(width):
-                new_line.append(0)
-            self.field.append(new_line)
+                newline.append(0)
+            self.grid.append(newline)
 
-    def nova_peca(self):
+    def nova_peca(self): # Cria uma nova peça e posiciona em x = 3 e y = 0
         self.figure = Block(3, 0)
 
-    def intersects(self):
+    def intersects(self): # Verifica se a peça atual encosta em algo fixo na tela
         intersection = False
         for i in range(4):
             for j in range(4):
@@ -103,47 +103,47 @@ class Tetris:
                     if i + self.figure.y > self.height - 1 or \
                             j + self.figure.x > self.width - 1 or \
                             j + self.figure.x < 0 or \
-                            self.field[i + self.figure.y][j + self.figure.x] > 0:
+                            self.grid[i + self.figure.y][j + self.figure.x] > 0:
                         intersection = True
         return intersection
 
-    def break_lines(self):
+    def break_lines(self): # Quebra a linha se a fileira horizontal estiver completa
         lines = 0
         for i in range(1, self.height):
-            zeros = 0
+            z = 0
             for j in range(self.width):
-                if self.field[i][j] == 0:
-                    zeros += 1
-            if zeros == 0:
+                if self.grid[i][j] == 0:
+                    z += 1
+            if z == 0:
                 lines += 1
                 for i1 in range(i, 1, -1):
                     for j in range(self.width):
-                        self.field[i1][j] = self.field[i1 - 1][j]
-        self.score += lines ** 2
+                        self.grid[i1][j] = self.grid[i1 - 1][j]
+        self.score += lines**2
 
-    def down(self):
+    def down(self): # Aumenta a velocidade da peça quando aperta a tecla down
         self.figure.y += 1
         if self.intersects():
             self.figure.y -= 1
             self.freeze()
 
-    def freeze(self):
+    def freeze(self): # Congela a peça quando ela toca no chão ou intersecciona outra peça
         for i in range(4):
             for j in range(4):
                 if i * 4 + j in self.figure.image():
-                    self.field[i + self.figure.y][j + self.figure.x] = self.figure.color
+                    self.grid[i + self.figure.y][j + self.figure.x] = self.figure.color
         self.break_lines()
         self.nova_peca()
         if self.intersects():
             self.state = "gameover"
 
-    def side(self, dx):
+    def side(self, dx): # Move a peça para a esquerda ou para a direita
         old_x = self.figure.x
         self.figure.x += dx
         if self.intersects():
             self.figure.x = old_x
 
-    def rotate(self):
+    def rotate(self): # Rotaciona a peça quando aperta espaço
         old_rotation = self.figure.rotation
         self.figure.rotate()
         if self.intersects():
@@ -329,7 +329,7 @@ while replay:
     pygame.mixer.music.load(os.path.join(SND_DIR, 'Tetris.wav'))
     pygame.mixer.music.set_volume(0.7) 
     pygame.mixer.music.play() 
-
+    pygame.mixer.music.play(loops=-1)
 
     while not done:
         screen.fill((0, 0, 0)) # Preenche com a cor preta
@@ -368,8 +368,8 @@ while replay:
         for i in range(game.height):
             for j in range(game.width):
                 pygame.draw.rect(screen, WHITE, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
-                if game.field[i][j] > 0:
-                    pygame.draw.rect(screen, cores[game.field[i][j]],
+                if game.grid[i][j] > 0:
+                    pygame.draw.rect(screen, cores[game.grid[i][j]],
                                     [game.x + game.PECA * j + 1, game.y + game.PECA * i + 1, game.PECA - 2, game.PECA - 1])
 
         if game.figure is not None:
