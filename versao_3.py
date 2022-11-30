@@ -197,7 +197,7 @@ while replay:
                 if event.type == pygame.QUIT:
                     state = QUIT
                     inicio = False
-                    exit()
+                    pygame.quit()
 
                 if event.type == pygame.KEYUP:
                     state = GAME
@@ -291,7 +291,7 @@ while replay:
                 if event.type == pygame.QUIT:
                     state = QUIT
                     inicio = False
-                    exit()
+                    pygame.quit()
 
                 if event.type == pygame.KEYUP:
                     state = GAME
@@ -347,7 +347,7 @@ while replay:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True # DONE
-                exit()
+                pygame.quit()
                 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
@@ -440,7 +440,7 @@ while replay:
                     
                     state = QUIT
                     perdeu = False
-                    exit()
+                    pygame.quit()
                 
                 if event.type == pygame.KEYDOWN:
 
@@ -449,7 +449,7 @@ while replay:
                         estado = 'fim'
                         perdeu = False
                         replay = False
-                        exit()
+                        pygame.quit()
 
                     if event.key == pygame.K_RETURN:
                         done = False
