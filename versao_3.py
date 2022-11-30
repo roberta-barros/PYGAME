@@ -428,6 +428,8 @@ while replay:
         texto3_x = 170
         texto3_y = 670
 
+        text = font.render("Score final: " + str(game.score), True, WHITE)
+
         # ----- Inicia estruturas de dados
         perdeu = True
 
@@ -463,6 +465,7 @@ while replay:
             screen.blit(texto2, (texto2_x, texto2_y))
             screen.blit(texto3, (texto3_x, texto3_y))
             screen.blit(tamanho_icone, (icone_x,icone_y))
+            screen.blit(text, [270, 470])
             # ----- Atualiza estado do jogo
             pygame.display.update()  # Mostra o novo frame para o jogador
 
