@@ -44,12 +44,12 @@ peca_speedy = 1  # Velocidade y da peça (velocidades positivas em y significam 
 class Block(pygame.sprite.Sprite):
 
     pecas = [
-        [[1, 5, 9, 13], [4, 5, 6, 7]],
-        [[4, 5, 9, 10], [2, 6, 5, 9]],
         [[6, 7, 9, 10], [1, 5, 6, 10]],
+        [[4, 5, 9, 10], [2, 6, 5, 9]],
+        [[1, 5, 9, 13], [4, 5, 6, 7]],
+        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
         [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
         [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
-        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
         [[1, 2, 5, 6]],
     ]
 
@@ -81,8 +81,8 @@ class Tetris:
     figure = None
 
     def __init__(self, height, width):
-        self.height = height
         self.width = width
+        self.height = height
         self.grid = []
         self.score = 0
         self.state = "start"
@@ -119,7 +119,7 @@ class Tetris:
                 for i1 in range(i, 1, -1):
                     for j in range(self.width):
                         self.grid[i1][j] = self.grid[i1 - 1][j]
-        self.score += lines**2
+        self.score += lines**2 # Guarda a pontuação
 
     def down(self): # Aumenta a velocidade da peça quando aperta a tecla down
         self.figure.y += 1
@@ -332,7 +332,7 @@ while replay:
     pygame.mixer.music.play(loops=-1)
 
     while not done:
-        screen.fill((0, 0, 0)) # Preenche com a cor preta
+        screen.fill(BLACK)
         screen.blit(background_img_small, (width, 0))
         if game.figure is None:
             game.nova_peca()
