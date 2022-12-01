@@ -1,7 +1,9 @@
 # PYGAME
-1. Tetris
-2. Camilla Junqueira, Fernanda Valesca, Roberta Barros
-3. 
+1. Título
+Tetris
+2. Integrantes
+Camilla Junqueira, Fernanda Valesca, Roberta Barros
+3. explicação do código
 • gera tela principal
 - estabelecimento de tamanhos 
    - telas (principal e secundária) 
@@ -42,8 +44,8 @@ voltar a jogar
   • fim de jogo
    - imagens
    - acabar/retornar 
-   
-• teclas para jogar
+
+4. teclas para jogar/rodar 
 necessidade de apertar o play/run inicialmente
 apertar qualquer tecla para começar a jogar 
   - espaço para rodar
@@ -51,7 +53,7 @@ apertar qualquer tecla para começar a jogar
   - baixo para acelerar
 espaço para sair ao final do jogo
 enter para recomeçar
-4. 
+5. links
 link para o video do jogo funcionando
 https://www.youtube.com/watch?v=BjbQFPUDJu85. referências
 Código extraído de :
@@ -60,6 +62,7 @@ https://levelup.gitconnected.com/writing-tetris-in-python-2a16bddb5318
 - Tela de menu/início de jogo e tela de final de jogo
 - Contagem de pontuação
 - instruções
-- fundo musical-
+- fundo musical
 - telas de instrução
-7. executar arquivo versão_3.py
+7. executar
+arquivo versão_3.py
