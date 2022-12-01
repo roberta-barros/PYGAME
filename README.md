@@ -42,6 +42,7 @@ voltar a jogar
   • fim de jogo
    - imagens
    - acabar/retornar 
+   
 • teclas para jogar
 necessidade de apertar o play/run inicialmente
 apertar qualquer tecla para começar a jogar 
@@ -52,13 +53,13 @@ espaço para sair ao final do jogo
 enter para recomeçar
 4. 
 link para o video do jogo funcionando
-https://youtu.be/pR8BR_ZoY8Q
-5. referências
+https://www.youtube.com/watch?v=BjbQFPUDJu85. referências
 Código extraído de :
 https://levelup.gitconnected.com/writing-tetris-in-python-2a16bddb5318
 6. o que está contido:
 - Tela de menu/início de jogo e tela de final de jogo
 - Contagem de pontuação
 - instruções
-- fundo musical
-Outros detalhes específicos de cada jogo (exemplos: inimigos que seguem o jogador, power-ups, telas de instrução, telas de história, botão de pause, ...)
+- fundo musical-
+- telas de instrução
+7. executar arquivo versão_3.py
