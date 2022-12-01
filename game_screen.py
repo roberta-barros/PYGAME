@@ -4,7 +4,7 @@ import pygame
 import random
 import sprites
 from os import path
-from config import IMG_DIR,FPS, GAME, QUIT
+from config import IMG_DIR,FPS, GAME, QUIT, cores
 from pygame import mixer 
 from assets import *
 
