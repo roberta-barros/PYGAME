@@ -42,8 +42,10 @@ peca_y = -PECA
 peca_speedx = 1
 peca_speedy = 1  # Velocidade y da peça (velocidades positivas em y significam que a peça vai se mover para baixo)
 
+# definição dos blocos
 class Block(pygame.sprite.Sprite):
 
+# matriz de peças e suas rotações
     pecas = [
         [[6, 7, 9, 10], [1, 5, 6, 10]],
         [[4, 5, 9, 10], [2, 6, 5, 9]],
@@ -54,6 +56,7 @@ class Block(pygame.sprite.Sprite):
         [[1, 2, 5, 6]],
     ]
 
+#sorteio da peça e da cor
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
@@ -65,9 +68,11 @@ class Block(pygame.sprite.Sprite):
     def image(self):
         return self.pecas[self.type][self.rotation]
 
+# define a rotação da figura
     def rotate(self):
         self.rotation = (self.rotation + 1) % len(self.pecas[self.type])
 
+# definições do jogo
 class Tetris:
     W, H = 10, 20
     x = 0
@@ -75,12 +80,12 @@ class Tetris:
     PECA = 38
     width = W * PECA
     height = H * PECA
-    level = 2
+    level = 2 #(velocidade)
     score = 0
     state = "start"
     grid = []
     figure = None
-
+#criação da tela
     def __init__(self, height, width):
         self.width = width
         self.height = height
@@ -327,7 +332,8 @@ while replay:
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     go_down = False
-
+ 
+ #música de fundo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'Tetris.wav'))
     pygame.mixer.music.set_volume(0.7) 
     pygame.mixer.music.play() 
@@ -346,11 +352,13 @@ while replay:
             if game.state == "start":
                 game.down()
 
+    # saida
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True # DONE
                 pygame.quit()
-                
+
+    # comandos do jogo
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
                     go_down = True
@@ -367,6 +375,7 @@ while replay:
             if event.key == pygame.K_DOWN:
                 go_down = False
 
+#desenhos da peça no jogo
         for i in range(game.height):
             for j in range(game.width):
                 pygame.draw.rect(screen, WHITE, [game.x + game.PECA * j, game.y + game.PECA * i, game.PECA, game.PECA], 1)
@@ -383,11 +392,11 @@ while replay:
                                         [game.x + game.PECA * (j + game.figure.x) + 1,
                                         game.y + game.PECA * (i + game.figure.y) + 1,
                                         game.PECA - 2, game.PECA - 2])
-
+# score
         font = pygame.font.SysFont('Britannia Bold', 40, True, False)
         font1 = pygame.font.SysFont('Britannia Bold', 65, True, False)
         text = font.render("Score: " + str(game.score), True, BLACK)
-
+#game over
         screen.blit(text, [400, 0])
         if game.state == "gameover":
             done = True # DONE
