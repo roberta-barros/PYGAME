@@ -55,8 +55,8 @@ espaço para sair ao final do jogo
 enter para recomeçar
 5. links
 link para o video do jogo funcionando
-https://www.youtube.com/watch?v=BjbQFPUDJu85. referências
-Código extraído de :
+https://www.youtube.com/watch?v=BjbQFPUDJu85
+Código extraído de (referência):
 https://levelup.gitconnected.com/writing-tetris-in-python-2a16bddb5318
 6. o que está contido:
 - Tela de menu/início de jogo e tela de final de jogo
