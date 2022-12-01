@@ -69,5 +69,4 @@ arquivo versão_3.py
 8. rascunhos
 versao 1
 versao 2
-assets
 peca(1-8), tetris_nivel2, tetris_nivel3, universo, fundo1, fundo, fundo_inicio_fim/1
