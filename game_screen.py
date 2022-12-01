@@ -2,6 +2,7 @@
 # ----- Importa e inicia pacotes
 import pygame
 import random
+import sprites
 from os import path
 from config import IMG_DIR,FPS, GAME, QUIT
 from pygame import mixer 
