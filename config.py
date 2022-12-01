@@ -16,6 +16,8 @@ FPS = 60
 
 # Define algumas variáveis com as cores básicas
 cores = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (120, 37, 179)]
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 # Estados para controle do fluxo da aplicação
 INIT = 0
