@@ -2,6 +2,7 @@
 # ----- Importa e inicia pacotes
 import pygame
 import random
+from sprites import Block, Tetris
 from os import path
 from config import IMG_DIR,FPS, GAME, QUIT, cores
 from pygame import mixer 
