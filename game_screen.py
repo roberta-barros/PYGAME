@@ -7,7 +7,7 @@ from config import IMG_DIR,FPS, GAME, QUIT
 from pygame import mixer 
 from assets import *
 
-def game_screen(window):
+def game_screen(screen):
     replay = True
 
     while replay:
