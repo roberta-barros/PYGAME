@@ -4,10 +4,10 @@ from config import IMG_DIR,FPS, GAME, QUIT, cores
 from pygame import mixer 
 from assets import *
 
-# definição dos blocos
+# Definição dos blocos
 class Block(pygame.sprite.Sprite):
 
-# matriz de peças e suas rotações
+# Matriz de peças e suas rotações
     pecas = [
         [[6, 7, 9, 10], [1, 5, 6, 10]],
         [[4, 5, 9, 10], [2, 6, 5, 9]],
@@ -18,7 +18,7 @@ class Block(pygame.sprite.Sprite):
         [[1, 2, 5, 6]],
     ]
 
-#sorteio da peça e da cor
+# Sorteio da peça e da cor
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
@@ -30,11 +30,11 @@ class Block(pygame.sprite.Sprite):
     def image(self):
         return self.pecas[self.type][self.rotation]
 
-# define a rotação da figura
+# Define a rotação da figura
     def rotate(self):
         self.rotation = (self.rotation + 1) % len(self.pecas[self.type])
 
-# definições do jogo
+# Definições do jogo
 class Tetris:
     W, H = 10, 20
     x = 0
@@ -47,7 +47,7 @@ class Tetris:
     state = "start"
     grid = []
     figure = None
-#criação da tela
+# Criação da tela
     def __init__(self, height, width):
         self.width = width
         self.height = height

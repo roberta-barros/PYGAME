@@ -12,7 +12,7 @@ pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-fps = 60
+FPS = 60
 Clock = pygame.time.Clock()
  
 W, H = 10, 20
@@ -348,7 +348,7 @@ while replay:
         if counter > 100000:
             counter = 0
 
-        if counter % (fps // game.level // 2) == 0 or go_down:
+        if counter % (FPS // game.level // 2) == 0 or go_down:
             if game.state == "start":
                 game.down()
 
@@ -402,7 +402,7 @@ while replay:
             done = True # DONE
         
         pygame.display.flip()
-        Clock.tick(fps)
+        Clock.tick(FPS)
 
     #Quando o jogador perder, uma tela de game over deve aparecer
     if done == True:
