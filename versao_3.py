@@ -26,6 +26,7 @@ game_screen = pygame.Surface(game_res)
 
 pygame.display.set_caption('Tetris')
 
+
 # ----- Inicia assets
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/fundo_inicio_fim2.png').convert()
@@ -213,6 +214,7 @@ while replay:
             pygame.display.flip()
 
 
+    # após inicío, haverá uma tela de instruções
     estado = 'manual'
     if estado == 'manual':
         clock = pygame.time.Clock()
