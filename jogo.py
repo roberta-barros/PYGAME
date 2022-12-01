@@ -9,8 +9,8 @@ pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Navinha')
+screen = pygame.display.set_mode(RES)
+pygame.display.set_caption('Tetris')
 
 game_screen(screen)
 
