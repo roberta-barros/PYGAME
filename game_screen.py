@@ -17,7 +17,7 @@ def game_screen(screen):
         estado = 'inicio'
         if estado == 'inicio': 
 
-            clock = pygame.time.Clock()
+            Clock = pygame.time.Clock()
 
             # Carrega o fundo da tela inicial
             #fundo
@@ -190,6 +190,8 @@ def game_screen(screen):
         pygame.mixer.music.play(loops=-1)
 
         while not done:
+            background = pygame.image.load('assets/img/fundo_inicio_fim2.png').convert()
+            background_img_small = pygame.transform.scale(background, (width, height))
             screen.fill(BLACK)
             screen.blit(background_img_small, (width, 0))
             if game.figure is None:
