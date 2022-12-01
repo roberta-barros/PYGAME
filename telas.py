@@ -1,7 +1,7 @@
 import pygame
 import random
 from os import path
-from game_screen import game_screen
+
 
 from config import IMG_DIR, FPS, GAME, QUIT
 
