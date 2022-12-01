@@ -5,28 +5,17 @@ IMG_DIR = path.join(path.dirname(__file__), 'assets', 'img')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'sound')
 FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 
-# Dados gerais do jogo.
-WIDTH = 700 # Largura da tela
-HEIGHT = 600 # Altura da tela
-FPS = 60 # Frames por segundo
-
-# Define tamanhos das peças
-PECA_WIDTH = 100
-PECA_HEIGHT = 400
-
-# Define as peças
-pecas = [
-        [[1, 5, 9, 13], [4, 5, 6, 7]],
-        [[4, 5, 9, 10], [2, 6, 5, 9]],
-        [[6, 7, 9, 10], [1, 5, 6, 10]],
-        [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
-        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
-        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
-        [[1, 2, 5, 6]],
-    ]
+# Define tamanhos das peças e os dados gerais do jogo
+W, H = 10, 20
+PECA = 38
+width = W * PECA
+height = H * PECA
+RES = 750, 760 
+game_res = width, height
+FPS = 60
 
 # Define algumas variáveis com as cores básicas
-cores_pecas = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (120, 37, 179)]
+cores = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (120, 37, 179)]
 
 # Estados para controle do fluxo da aplicação
 INIT = 0
